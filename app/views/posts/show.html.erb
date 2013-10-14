@@ -18,3 +18,11 @@
     <li> <%= comment.body %> </li>
   <% end %>
 </ul>
+
+</br>
+<h5> Categories </h5>
+<ul> 
+  <%@post.reload.categories.each do |category| %>
+    <li> <%= link_to category.name, category_path(category) %> </li>
+    <% end %>
+</ul>
