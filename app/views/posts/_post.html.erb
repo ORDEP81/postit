@@ -1,0 +1,31 @@
+<% if logged_in? %>
+
+  <%= link_to vote_post_path(post, vote: 'true'), method: 'post' do %>
+    <i class= 'icon-arrow-up'></i>
+  <% end %>
+<% end %>
+
+</br>
+
+<span> <%= post.total_votes %> </span>
+
+<%= link_to post.title, post_path(post) %> 
+<% if logged_in? %>
+  [<%= link_to 'Edit', edit_post_path(post)%>]
+<% end %>
+
+
+</br>
+
+<% if logged_in? %>
+
+  <%= link_to vote_post_path(post, vote: 'false'), method: 'post' do %>
+    <i class= 'icon-arrow-down'></i>
+  <% end %>
+
+<% end %>
+</br>
+</br>
+
+
+

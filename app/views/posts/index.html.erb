@@ -1,9 +1,5 @@
 <h3>Welcome!</h3>
 
 <% @post.each do |post| %>
- <ul>
-  <li> <%= link_to post.title, post_path(post) %> 
-   [<%= link_to 'Edit', edit_post_path(post) %>] </li>
-</ul>
+ <%= render 'post', post: post %>
 <% end %>
-

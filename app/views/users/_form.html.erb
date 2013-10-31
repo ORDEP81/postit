@@ -1,0 +1,9 @@
+<%= form_for @user do |f| %>
+  <%= render 'shared/errors' , obj: @user %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <%= f.label :password %>
+  <%= f.text_field :password %>
+</br>
+  <%= f.submit 'Register' %>
+<% end %>

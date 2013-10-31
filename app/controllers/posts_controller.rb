@@ -1,14 +1,14 @@
 class PostsController < ApplicationController
   
-  before_action :set_post, only:[:edit, :show, :update]
+  before_action :set_post, only:[:edit, :show, :update, :vote]
+  before_action :require_user, except:[:index, :show, :vote]
 
   def index
-    @post = Post.all
+    @post = Post.all.sort_by {|x| x.total_votes}.reverse
   end
 
   def create
     @post = Post.new(post_params)
-    #binding.pry
     if @post.save
       flash[:notice] = "Post has been saved."
       redirect_to posts_path
@@ -40,6 +40,12 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def vote
+    Vote.create(voteable: @post, user_id: session[:user_id], vote:params[:vote])
+    redirect_to :back, notice: 'Your post vote has been submited.'
+
   end
 
   private
