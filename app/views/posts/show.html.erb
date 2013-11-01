@@ -13,13 +13,13 @@
   <% end %>
  
 <h5> Comments </h5>
-<ul>
+
   <% @post.reload.comments.each do |comment| %>
-    <li> <%= comment.body %> </li>
+   
 
       <% if logged_in? %>
 
-  <%= link_to vote_post_comment_path(comment.post, comment, vote: 'true'), method: 'comment' do %>
+  <%= link_to vote_post_comment_path(comment.post, comment, vote: 'true'), method: 'post' do %>
     <i class= 'icon-arrow-up'></i>
   <% end %>
 <% end %>
@@ -28,14 +28,14 @@
 
 <span> <%= comment.total_votes %> </span>
 
-
+  <%= comment.body %> 
 
 
 </br>
 
 <% if logged_in? %>
 
-  <%= link_to vote_post_comment_path(comment.post, comment, vote: 'false'), method: 'comment' do %>
+  <%= link_to vote_post_comment_path(comment.post, comment, vote: 'false'), method: 'post' do %>
     <i class= 'icon-arrow-down'></i>
   <% end %>
 

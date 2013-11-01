@@ -44,8 +44,11 @@ class PostsController < ApplicationController
 
   def vote
     Vote.create(voteable: @post, user_id: session[:user_id], vote:params[:vote])
-    redirect_to :back, notice: 'Your post vote has been submited.'
 
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'Your post vote has been submited.' }
+      format.js 
+    end
   end
 
   private

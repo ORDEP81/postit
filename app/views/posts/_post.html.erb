@@ -1,13 +1,13 @@
 <% if logged_in? %>
 
-  <%= link_to vote_post_path(post, vote: 'true'), method: 'post' do %>
+  <%= link_to vote_post_path(post, vote: 'true'), method: 'post', remote: true do %>
     <i class= 'icon-arrow-up'></i>
   <% end %>
 <% end %>
 
 </br>
 
-<span> <%= post.total_votes %> </span>
+<span id='post_<%= post.id %>_votes'> <%= post.total_votes %> </span>
 
 <%= link_to post.title, post_path(post) %> 
 <% if logged_in? %>
@@ -19,7 +19,7 @@
 
 <% if logged_in? %>
 
-  <%= link_to vote_post_path(post, vote: 'false'), method: 'post' do %>
+  <%= link_to vote_post_path(post, vote: 'false'), method: 'post', remote: true do %>
     <i class= 'icon-arrow-down'></i>
   <% end %>
 
