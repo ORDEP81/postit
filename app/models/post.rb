@@ -10,6 +10,8 @@ class Post < ActiveRecord::Base
   validates :title, presence: true
   validates :url, presence: true
 
+  
+  
 
   def total_votes
    self.up_votes - self.down_votes

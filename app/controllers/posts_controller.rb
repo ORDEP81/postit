@@ -26,7 +26,6 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
-    
   end
 
   def update
@@ -43,12 +42,19 @@ class PostsController < ApplicationController
   end
 
   def vote
-    Vote.create(voteable: @post, user_id: session[:user_id], vote:params[:vote])
-
+    @vote = Vote.create(voteable: @post, user_id: session[:user_id], vote:params[:vote])
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Your post vote has been submited.' }
+      format.html do
+        if @vote.valid?
+         flash[:notice] = 'Your post vote has been submited.' 
+       else
+          flash[:error] = 'Your vote has already been counted.'
+        end
+          redirect_to :back
+      end
       format.js 
     end
+
   end
 
   private

@@ -14,11 +14,24 @@ def create
 end
 
 def vote
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by(slug: params[:post_id])
     @comment = Comment.find(params[:id])
 
-   Vote.create(voteable: @comment, user_id: session[:user_id], vote: params[:vote])
-    redirect_to :back, notice: "Your comment vote has been submited."
+    @vote = Vote.create(voteable: @comment, user_id: session[:user_id], vote: params[:vote])
+    
+
+     respond_to do |format|
+      format.html do
+        if @vote.valid?
+         flash[:notice] = 'Your post vote has been submited.' 
+       else
+          flash[:error] = 'Your vote has already been counted.'
+        end
+          redirect_to :back
+      end
+      format.js 
+    end
+
 end
 
 
