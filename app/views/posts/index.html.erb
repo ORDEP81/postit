@@ -1,4 +1,8 @@
-<h3>Welcome!</h3>
+<h3>Welcome to Ordep's Post-it!</h3>
+
+<% if !logged_in? %>
+  <h4>Please<%= link_to ' log in', login_path %> or <%= link_to 'Register', register_path %></h4>
+<% end %>
 
 <% @post.each do |post| %>
  <%= render 'post', post: post %>
